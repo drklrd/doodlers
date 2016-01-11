@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+#canvasDiv{
+	border: 5px solid red;
+}
+
+#header{
+	margin-top:0px;
+	margin-bottom: 60px;
+}
+
+#login-wrapper{
+	position: absolute;
+	left:50%;
+}

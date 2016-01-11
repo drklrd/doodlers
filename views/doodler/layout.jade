@@ -1,0 +1,14 @@
+doctype html
+html
+	head
+		title Doodlers
+		meta(name='viewport',content='width=device-width,initial-scale=1,maximum-scale=1')
+		meta(http-equiv='content-type',content='text/html; charset=UTF-8')
+		meta(charset='utf-8')
+		meta(name='description',content='')
+		include headerjs
+		include headercss
+	body(ng-app='doodlers')
+		include header
+		block content
+			ui-view
