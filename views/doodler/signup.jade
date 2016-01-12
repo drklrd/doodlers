@@ -1,5 +1,5 @@
 #login-wrapper
-    form(name='loginForm',novalidate)
+    form(name='signUpForm',novalidate)
 
         br
         .row
@@ -7,15 +7,15 @@
               label
                 span.fa.fa-user
                 | Email Address
-              input(type='text',ng-model="user.username")
+              input(type='text',ng-model="user.username",required)
         .row
             md-input-container.nofl(flex)
               label
                 span.fa.fa-user
                 | Password
-              input(type='password',ng-model="user.password")
-        md-button.md-raised(ng-click='login()')
-            span Login
+              input(type='password',ng-model="user.password",required)
+        md-button.md-raised(ng-click='signUp()',ng-disabled='signUpForm.$invalid')
+            span Create Account
         br
         span.font-danger(ng-show='loginResponse.status')
             | {{loginResponse.message}}

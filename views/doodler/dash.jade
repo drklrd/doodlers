@@ -1,1 +1,26 @@
-span DASH
+#dash-wrapper
+	span(ng-show="!posts.length") No recent post(s) to show.
+	span(ng-show="posts.length") Showing recent post(s)
+		br
+		br
+		.each-post(ng-repeat="post in posts")
+			.row
+				.col-xs-6
+					span {{post.post}}
+				.col-xs-6
+					.row
+						.col-xs-6
+							md-button.md-raised(ng-click='editPost()')
+								span Edit
+						.col-xs-6
+							md-button.md-raised(ng-click='deletePost()')
+								span Delete
+			
+	br
+	br
+	md-input-container(md-no-float)
+		textarea(placeholder="Write Here",ng-model="newpost.post")
+	br
+	.pull-right
+		md-button.md-raised(ng-click='newPost()')
+			span Express

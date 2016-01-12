@@ -9,6 +9,7 @@ html
 		include headerjs
 		include headercss
 	body(ng-app='doodlers')
-		include header
-		block content
-			ui-view
+		.header(ng-controller='headerController')
+			include header
+			block content
+				ui-view
