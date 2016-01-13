@@ -53,10 +53,11 @@ router.get('/test/me',function(req,res,next){
 });
 
 router.get('/users/posts/fetch',function(req,res,next){
-	var sql = 'SELECT * from posts WHERE user_id='+ req.user.id;
+	var sql = 'SELECT posts.id,posts.user_id,posts.post,posts.created_at,users.id,users.first_name,users.last_name,users.color_profile from posts INNER JOIN users ON users.id=posts.user_id  WHERE posts.user_id='+ req.user.id+" ORDER BY posts.created_at DESC";
 	dbconnect.connect(sql,function(err,result){
 		console.log(err)
 		if(err) return next(err);
+		console.log(result)
 		res.json({
 			success:1,
 			posts : result
@@ -86,7 +87,7 @@ router.post('/common/create/new',function(req,res,next){
 	dbconnect.connect(sqlCheck,function(err,result){
 		if(err) return next(err);
 		if(!(result && result.length)){
-			var sql = "INSERT INTO users (id,account,password,created_at,updated_at,is_deleted) VALUES (NULL,'"+req.body.username+"','"+req.body.password+"',NULL,NULL,0) ";
+			var sql = "INSERT INTO users (id,account,password,first_name,last_name,color_profile,created_at,updated_at,is_deleted) VALUES (NULL,'"+req.body.username+"','"+req.body.password+"','"+req.body.firstname+"','"+req.body.lastname+"','"+req.body.colorprofile+"',NULL,NULL,0) ";
 			console.log(sql)
 			dbconnect.connect(sql,function(err,result){
 				console.log(err)

@@ -1,26 +1,49 @@
 #dash-wrapper
-	span(ng-show="!posts.length") No recent post(s) to show.
-	span(ng-show="posts.length") Showing recent post(s)
+	section.md-whiteframe-z3
+		.row
+			.col-xs-12
+				md-input-container(md-no-float)
+					textarea(placeholder="Write Here",ng-model="newpost.post",max-length=5)
+		.row
+			.col-xs-12
+				md-button.md-raised.pull-right(ng-click='newPost()')
+					span Express
 		br
+
+	br
+	section.md-whiteframe-z3
 		br
-		.each-post(ng-repeat="post in posts")
-			.row
-				.col-xs-6
-					span {{post.post}}
-				.col-xs-6
-					.row
-						.col-xs-6
-							md-button.md-raised(ng-click='editPost()')
-								span Edit
-						.col-xs-6
-							md-button.md-raised(ng-click='deletePost()')
-								span Delete
-			
-	br
-	br
-	md-input-container(md-no-float)
-		textarea(placeholder="Write Here",ng-model="newpost.post")
-	br
-	.pull-right
-		md-button.md-raised(ng-click='newPost()')
-			span Express
+		span.padding-normal(ng-show="!posts.length") 
+			span No recent post(s) to show.
+			br
+			br
+		span.padding-normal(ng-show="posts.length") Showing recent post(s) 
+			br
+			br
+			.each-post(ng-repeat="post in posts track by $index")
+				.row
+					.col-xs-6
+						span.badge.font-20.pointer(style="background-color:{{post.color_profile}}") {{post.first_name[0]}} {{post.last_name[0]}}
+						span.font-14.fromNow {{post.fromNow}}
+
+						.font-20.padding-normal#text-overflow(ng-show="!post.viewWhole") {{post.post}}
+						.font-20.padding-normal.post-text-width(ng-show="post.viewWhole") 
+							span {{post.post}} 
+
+						br
+					.col-xs-6
+						.row
+							.col-xs-4
+								md-button.md-raised(ng-click='viewWhole($index)')
+									span(ng-if="!post.viewWhole") View Whole
+									span(ng-if="post.viewWhole") View Less
+
+							.col-xs-4
+								md-button.md-raised(ng-click='editPost()')
+									span Edit
+							.col-xs-4
+								md-button.md-raised(ng-click='deletePost()')
+									span Delete
+				
+		
+		

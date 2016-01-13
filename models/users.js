@@ -2,11 +2,27 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("users", {
-    account: DataTypes.STRING,
-    password : DataTypes.STRING,
-    created_at:DataTypes.DATE,
-    updated_at:DataTypes.DATE,
-    is_deleted:DataTypes.BOOLEAN
+    account:  {
+    	type :  DataTypes.STRING,
+    	field : 'account'
+    },
+    password : {
+    	type : DataTypes.STRING,
+    	field:'password'
+    },
+    createdAt:{
+    	type:DataTypes.DATE,
+    	field : 'created_at'
+    },
+    updatedAt:{
+    	type : DataTypes.DATE,
+    	field :'updated_at'
+    },
+    is_deleted:{
+    	type:DataTypes.BOOLEAN,
+    	field:'is_deleted'
+
+    } 
 
   
   });

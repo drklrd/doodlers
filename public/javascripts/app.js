@@ -1,4 +1,4 @@
-var doodlers = angular.module('doodlers',['ui.router','ngMaterial']);
+var doodlers = angular.module('doodlers',['ui.router','ngMaterial','colorpicker.module']);
 doodlers.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
   	$httpProvider.interceptors.push('authInterceptor');
@@ -100,6 +100,11 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 					if(data.success && !data.error){
 						$scope.posts=[];
 						$scope.posts = data.posts;
+						if($scope.posts.length){
+							$scope.posts.forEach(function(entry){
+								entry.fromNow = moment(entry.created_at).fromNow();
+							})
+						}
 					}
 				})
 	}
@@ -115,9 +120,16 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 				success(function(data){
 					if(data.success){
 						$scope.fetchPosts();
+						$scope.newpost={};
 						
 					}
 				})
+	};
+
+	$scope.viewWhole = function (index) {
+
+		$scope.posts[index].viewWhole=!$scope.posts[index].viewWhole;
+
 	}
 
 
@@ -131,6 +143,7 @@ doodlers.controller('headerController',['$scope','$window',function($scope,jhyal
 		$scope.header = {
 			loggedIn:true
 		};
+
 	}else{
 		$scope.header = {
 			loggedIn:false
@@ -157,7 +170,6 @@ doodlers.controller('signUpController',['$state','$scope','$http',function($stat
 	
 
 	$scope.signUp = function () {
-
 		$http.
 			post('/common/create/new',$scope.user).
 				success(function(data){

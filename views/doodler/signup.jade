@@ -1,21 +1,63 @@
 #login-wrapper
-    form(name='signUpForm',novalidate)
+  section.md-whiteframe-z3
+    .font-20.font-new-nimbus
+      span Sign Up
+    .padding-signup
+      form(name='signUpForm',novalidate)
 
-        br
-        .row
-            md-input-container.nofl(flex)
-              label
-                span.fa.fa-user
-                | Email Address
-              input(type='text',ng-model="user.username",required)
-        .row
-            md-input-container.nofl(flex)
-              label
-                span.fa.fa-user
-                | Password
-              input(type='password',ng-model="user.password",required)
-        md-button.md-raised(ng-click='signUp()',ng-disabled='signUpForm.$invalid')
-            span Create Account
-        br
-        span.font-danger(ng-show='loginResponse.status')
-            | {{loginResponse.message}}
+          br
+          
+
+          .row
+            .col-xs-6
+              md-input-container.nofl(flex)
+                label
+                  span.fa.fa-user
+                  | First Name
+                input(type='text',ng-model="user.firstname",required)
+            .col-xs-6
+              md-input-container.nofl(flex)
+                label
+                  span.fa.fa-user
+                  | Last Name
+                input(type='text',ng-model="user.lastname",required)
+          .row
+            .col-xs-6
+              md-input-container.nofl(flex)
+                label
+                  span.fa.fa-user
+                  | Select Color Profile
+                input(colorpicker="hex" type="text" ng-model="user.colorprofile",required)
+            .col-xs-6
+              md-content
+                md-list
+                  md-list-item
+                    span i
+          .row
+            .col-xs-6
+              md-input-container.nofl(flex)
+                label
+                  span.fa.fa-user
+                  | Email Address
+                input(type='text',ng-model="user.username",required)
+            .col-xs-6
+              md-input-container.nofl(flex)
+                label
+                  span.fa.fa-user
+                  | Password
+                input(type='password',ng-model="user.password",required)
+
+              
+              
+
+              
+          .row
+            .col-xs-4
+            .col-xs-8
+          
+              md-button.md-raised(ng-click='signUp()',ng-disabled='signUpForm.$invalid')
+                  span Create Account
+              br
+              span.font-danger(ng-show='loginResponse.status')
+                  | {{loginResponse.message}}
+              
