@@ -159,7 +159,7 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 				}
 			})
 
-
+	angular.element('#write-here').focus();
 
 
 }]);

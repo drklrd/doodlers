@@ -31,7 +31,10 @@ app.use('/users/*', jwt({
     secret: jwtSecret
 }));
 
-app.use('/', routes);
+var router=express.Router();
+app.use('/', router);
+
+require('./routes')(router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

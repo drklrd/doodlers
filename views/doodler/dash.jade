@@ -7,7 +7,7 @@ br
             .row
                 .col-xs-12.padding-normal
                     md-input-container(md-no-float)
-                        textarea(placeholder="Write Here",ng-model="newpost.post")
+                        textarea#write-here(placeholder="Write here... express your thoughts.... write as if you were waiting this moment....",ng-model="newpost.post")
             .row
                 .col-xs-12
                     md-button.md-raised.pull-right(ng-click='newPost()')
