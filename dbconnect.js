@@ -10,6 +10,7 @@ module.exports = {
 		pool.getConnection(function(err,connection){
 			if(err) return cb(err);
 			connection.query(sqlQuery,function(err,result){
+				connection.release();
 				if(err) return cb(err);
 				return cb(null,result)
 			})

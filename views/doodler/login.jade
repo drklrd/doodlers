@@ -1,21 +1,32 @@
 #login-wrapper
-    form(name='loginForm',novalidate)
-
-        br
-        .row
-            md-input-container.nofl(flex)
-              label
-                span.fa.fa-user
-                | Email Address
-              input(type='text',ng-model="user.username")
-        .row
-            md-input-container.nofl(flex)
-              label
-                span.fa.fa-user
-                | Password
-              input(type='password',ng-model="user.password")
-        md-button.md-raised(ng-click='login()')
-            span Login
-        br
-        span.font-danger(ng-show='loginResponse.status')
-            | {{loginResponse.message}}
+    section.md-whiteframe-z3
+      .font-20.font-new-nimbus
+        span Login
+      .padding-signup
+        form(name='loginForm',novalidate)
+          
+            .row
+                
+                input.form-control(type='text',placeholder='Username', ng-model="user.username",required)
+            br
+            .row
+                
+                input.form-control(type='password',placeholder='Password',ng-model="user.password",required)
+            br
+            .row
+                .col-xs-4
+                .col-xs-4
+                  md-button.md-raised(ng-click='login()',ng-disabled="loginForm.$invalid")
+                      span Login
+                  br
+                  span.font-danger(ng-show='loginResponse.status')
+                      | {{loginResponse.message}}
+            br
+            .row
+              .col-xs-6
+                span Dont have an account ? 
+                br
+                span.underline.pointer(ui-sref='signup') Sign Up 
+                span here !
+              .col-xs-6
+                span.pull-right.pointer.underline Forgot Password ?

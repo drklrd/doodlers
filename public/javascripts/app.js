@@ -20,6 +20,10 @@ doodlers.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 	      url: "/dash/home",
 	      templateUrl: "/dashhomerender",
 	      controller : 'dashController'
+	    }).
+	    state("signupsuccessful",{
+	    	url:'/signupsuccessful',
+	    	templateUrl:'signupsuccessfulrenderer'
 	    })
 
     
@@ -58,7 +62,19 @@ doodlers.controller('loginController',['$state','$http','$scope','$window',funct
 	$scope.user = {};
 
 	if($window.localStorage.doodlersToken){
-		$window.location.replace('/#/dash/home');
+		$http.
+			get('/verifytoken').
+				success(function(data){
+					if(data.success && !data.error){
+						$window.location.replace('/#/dash/home');
+
+					}else{
+						delete $window.localStorage.doodlersToken;
+						$window.location.replace('/#/login');
+
+
+					}
+				})
 		return;
 	}else{
 		$scope.loginResponse = {
@@ -130,7 +146,18 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 
 		$scope.posts[index].viewWhole=!$scope.posts[index].viewWhole;
 
-	}
+	};
+
+	$http.
+		get('/users/profile/fetch').
+			success(function(data){
+				if(data.success ){
+					angular.element('#header').css('background-color',data.profile.color_profile);
+					$scope.loggedinuser.firstName = data.profile.first_name;
+					$scope.loggedinuser.lastName = data.profile.last_name;
+
+				}
+			})
 
 
 
@@ -138,6 +165,8 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 }]);
 
 doodlers.controller('headerController',['$scope','$window',function($scope,jhyal){
+
+	$scope.loggedinuser={};
 
 	if(jhyal.localStorage.doodlersToken){
 		$scope.header = {
@@ -160,6 +189,9 @@ doodlers.controller('headerController',['$scope','$window',function($scope,jhyal
 		};
 
 		jhyal.location.replace('/#/login');
+
+		angular.element('#header').css('background-color','transparent');
+		$scope.loggedinuser = {} ;
 	}
 
 

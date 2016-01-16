@@ -34,6 +34,10 @@ router.get('/dashhomerender',function(req,res){
 	res.render('doodler/dash');
 });
 
+router.get('/signupsuccessfulrenderer',function(req,res){
+	res.render('doodler/signupsuccessful')
+})
+
 router.get('/test/me',function(req,res,next){
 
 	// models.usersT.findOne({where:{account:'test@123.co'}},function(err,result){
@@ -80,6 +84,22 @@ router.post('/users/posts/new',function(req,res,next){
 
 
 });
+
+router.get('/users/profile/fetch',function(req,res,next){
+
+	var sql = "SELECT * from users where id="+req.user.id;
+	console.log(sql)
+	dbconnect.connect(sql,function(err,result){
+		console.log(err)
+		if(err) return next(err);
+		res.json({
+			success:1,
+			profile:result[0]
+		})
+	});
+
+
+})
 
 router.post('/common/create/new',function(req,res,next){
 
@@ -168,5 +188,24 @@ router.post('/authenticate',function(req,res,next){
 	});
 
 });
+
+router.get('/verifytoken',function(req,res,next){
+
+	var authorizationHeader = req.headers.authorization;
+	var token = authorizationHeader.split(" ")[1];
+	jwt.verify(token, jwtSecret, function(err, decoded) {
+		console.log(err)
+	    if(err) {
+	    	res.json(err)
+	    }else{
+	    	res.json({
+	    		success : 1,
+	    		message : 'error!'
+	    	})
+	    }
+	    
+	});
+
+})
 
 module.exports = router;

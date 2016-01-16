@@ -1,49 +1,78 @@
-#dash-wrapper
-	section.md-whiteframe-z3
-		.row
-			.col-xs-12
-				md-input-container(md-no-float)
-					textarea(placeholder="Write Here",ng-model="newpost.post",max-length=5)
-		.row
-			.col-xs-12
-				md-button.md-raised.pull-right(ng-click='newPost()')
-					span Express
-		br
+br
+.row
+    .col-xs-2
+        span Hello
+    .col-xs-8
+        section.md-whiteframe-z3
+            .row
+                .col-xs-12.padding-normal
+                    md-input-container(md-no-float)
+                        textarea(placeholder="Write Here",ng-model="newpost.post")
+            .row
+                .col-xs-12
+                    md-button.md-raised.pull-right(ng-click='newPost()')
+                        span Express
+            br
 
-	br
-	section.md-whiteframe-z3
-		br
-		span.padding-normal(ng-show="!posts.length") 
-			span No recent post(s) to show.
-			br
-			br
-		span.padding-normal(ng-show="posts.length") Showing recent post(s) 
-			br
-			br
-			.each-post(ng-repeat="post in posts track by $index")
-				.row
-					.col-xs-6
-						span.badge.font-20.pointer(style="background-color:{{post.color_profile}}") {{post.first_name[0]}} {{post.last_name[0]}}
-						span.font-14.fromNow {{post.fromNow}}
+        br
+        section.md-whiteframe-z3
+            br
+            span.padding-normal(ng-show="!posts.length") 
+                span No recent post(s) to show.
+                br
+                br
+            span.padding-normal(ng-show="posts.length") Showing recent post(s) 
+                br
+                br
+                .each-post(ng-repeat="post in posts track by $index")
+                    .row
+                        .col-xs-6
+                            .row
+                                .col-xs-3
+                                    span.badge.font-20.pointer(style="background-color:{{post.color_profile}}") {{post.first_name[0]}} {{post.last_name[0]}}
+                            .row
+                                .col-xs-6.pull-left
+                                    span.font-14.fromNow {{post.fromNow}}
+                            .row
 
-						.font-20.padding-normal#text-overflow(ng-show="!post.viewWhole") {{post.post}}
-						.font-20.padding-normal.post-text-width(ng-show="post.viewWhole") 
-							span {{post.post}} 
+                                .font-20.padding-normal#text-overflow(ng-show="!post.viewWhole") {{post.post}}
+                                .font-20.padding-normal#post-text-width(ng-show="post.viewWhole") 
+                                    //- span {{post.post}} 
+                                    //- md-input-container(md-no-float)
+                                    textarea.full-post-dimension(placeholder="Write Here",ng-model="post.post")
 
-						br
-					.col-xs-6
-						.row
-							.col-xs-4
-								md-button.md-raised(ng-click='viewWhole($index)')
-									span(ng-if="!post.viewWhole") View Whole
-									span(ng-if="post.viewWhole") View Less
+                            br
+                        .col-xs-6
+                            .btn-group(class='dropdown', is-open='status.isopen').pull-right
+                              button.btn(type='button', data-toggle='dropdown')
+                                  span.caret  
+                              ul.dropdown-menu(role='menu', aria-labelledby='single-button')
+                                li(role='menuitem')
+                                          a.pointer(ng-click='viewWhole($index)')
+                                              span(ng-if="!post.viewWhole") View Whole
+                                              span(ng-if="post.viewWhole") View Less
+                                li(role='menuitem')
+                                  a.pointer
+                                    span Edit
+                                li(role='menuitem')
+                                  a.pointer
+                                    span Delete
+                            //- .row
+                            //-     .col-xs-4
 
-							.col-xs-4
-								md-button.md-raised(ng-click='editPost()')
-									span Edit
-							.col-xs-4
-								md-button.md-raised(ng-click='deletePost()')
-									span Delete
-				
-		
-		
+                            //-         md-button.md-raised(ng-click='viewWhole($index)')
+                            //-             span(ng-if="!post.viewWhole") View Whole
+                            //-             span(ng-if="post.viewWhole") View Less
+
+                            //-     .col-xs-4
+                            //-         md-button.md-raised(ng-click='editPost()')
+                            //-             span Edit
+                            //-     .col-xs-4
+                            //-         md-button.md-raised(ng-click='deletePost()')
+                            //-             span Delete
+    .col-xs-2
+        span Razing Thoughts
+
+                    
+            
+            

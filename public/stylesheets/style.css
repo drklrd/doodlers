@@ -14,6 +14,8 @@ a {
 #header{
 	margin-top:0px;
 	margin-bottom: 5px;
+	padding : 50px;
+	border-radius: 20px;
 }
 
 #login-wrapper{
@@ -87,6 +89,26 @@ a {
 	text-overflow: ellipsis;
 }
 
-.post-text-width{
+#post-text-width{
 	width: 25em;
+}
+
+.font-white{
+	color: #ffffff;
+	font-size: 20px;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.full-post-dimension {
+	height: 200px;
+	width:200%;
+	padding: 15px;
+	border: none;
 }
