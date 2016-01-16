@@ -10,7 +10,7 @@ var jwt = require('express-jwt');
 var config = require('./config');
 var jwtSecret = config.jwtSecret;
 var app = express();
-// var models = require("./models");
+var models = require("./models");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -69,14 +69,14 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// models.sequelize.sync().then(function(){
+models.sequelize.sync().then(function(){
 
   app.listen('1989',function(){
       console.log(colorMe.cyan('Doodlers running  graciously at PORT 1989.'));
   })
 
 
-// });
+});
 
 
 
