@@ -108,7 +108,8 @@ a {
 
 .full-post-dimension {
 	height: 200px;
-	width: 150%;
+	/*width: auto;*/
 	padding: 15px;
 	border: none;
+	overflow: auto;
 }

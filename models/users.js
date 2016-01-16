@@ -2,13 +2,31 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("users", {
+    first_name:  {
+        type :  DataTypes.STRING,
+        field : 'first_name',
+        allowNull : false
+    },
+    last_name:  {
+        type :  DataTypes.STRING,
+        field : 'last_name',
+        allowNull : false
+    },
+    color_profile:  {
+        type :  DataTypes.STRING,
+        field : 'color_profile',
+        allowNull : false
+    },
     account:  {
     	type :  DataTypes.STRING,
-    	field : 'account'
+    	field : 'account',
+        allowNull : false
     },
     password : {
     	type : DataTypes.STRING,
-    	field:'password'
+    	field:'password',
+        allowNull : false
+        
     },
     createdAt:{
     	type:DataTypes.DATE,

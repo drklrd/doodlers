@@ -33,13 +33,7 @@ br
                             .row
                                 .col-xs-6.pull-left
                                     span.font-14.fromNow {{post.fromNow}}
-                            .row
-
-                                .font-20.padding-normal#text-overflow(ng-show="!post.viewWhole") {{post.post}}
-                                .font-20.padding-normal#post-text-width(ng-show="post.viewWhole") 
-                                    //- span {{post.post}} 
-                                    //- md-input-container(md-no-float)
-                                    textarea.full-post-dimension(placeholder="Write Here",ng-model="post.post")
+                            
 
                             br
                         .col-xs-6
@@ -56,20 +50,19 @@ br
                                     span Edit
                                 li(role='menuitem')
                                   a.pointer
-                                    span Delete
-                            //- .row
-                            //-     .col-xs-4
-
-                            //-         md-button.md-raised(ng-click='viewWhole($index)')
-                            //-             span(ng-if="!post.viewWhole") View Whole
-                            //-             span(ng-if="post.viewWhole") View Less
-
-                            //-     .col-xs-4
-                            //-         md-button.md-raised(ng-click='editPost()')
-                            //-             span Edit
-                            //-     .col-xs-4
-                            //-         md-button.md-raised(ng-click='deletePost()')
-                            //-             span Delete
+                                    span 
+                    .row
+                        .col-xs-1
+                        .col-xs-11
+                            .font-20.padding-normal#text-overflow(ng-show="!post.viewWhole") {{post.post}}
+                            .font-20.padding-normal(ng-show="post.viewWhole") 
+                                //- span {{post.post}} 
+                                //- md-input-container(md-no-float)
+                                .col-xs-12
+                                    .full-post-dimension
+                                        span {{post.post}}
+                    hr
+                            
     .col-xs-2
         span Razing Thoughts
 

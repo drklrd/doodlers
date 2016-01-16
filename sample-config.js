@@ -18,7 +18,8 @@
 module.exports = {
 
 	mysql : {
-		user : 'root',
+		username : 'root',
+		user : 'root' ,
 		password : '',
 		database : 'doodlers',
 		host : '127.0.0.1',

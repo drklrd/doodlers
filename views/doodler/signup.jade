@@ -12,38 +12,40 @@
             .col-xs-6
               md-input-container.nofl(flex)
                 label
-                  span.fa.fa-user
+                  span
                   | First Name
                 input(type='text',ng-model="user.firstname",required)
             .col-xs-6
               md-input-container.nofl(flex)
                 label
-                  span.fa.fa-user
+                  span
                   | Last Name
                 input(type='text',ng-model="user.lastname",required)
           .row
             .col-xs-6
-              md-input-container.nofl(flex)
-                label
-                  span.fa.fa-user
-                  | Select Color Profile
-                input(colorpicker="hex" type="text" ng-model="user.colorprofile",required)
+              //- md-input-container.nofl(flex)
+              //-   label
+              //-     span.fa.fa-user
+              //-     | Select Color Profile
+              md-button.md-raised(colorpicker="hex" ng-model="user.colorprofile",required)
+                span Select Color Profile
             .col-xs-6
               md-content
                 md-list
                   md-list-item
-                    span i
+                    span(ng-show="!user.colorprofile")  Select a color profile.
+                    span(ng-show="user.colorprofile") {{user.colorprofile}}
           .row
             .col-xs-6
               md-input-container.nofl(flex)
                 label
-                  span.fa.fa-user
+                  span
                   | Email Address
                 input(type='text',ng-model="user.username",required)
             .col-xs-6
               md-input-container.nofl(flex)
                 label
-                  span.fa.fa-user
+                  span
                   | Password
                 input(type='password',ng-model="user.password",required)
 

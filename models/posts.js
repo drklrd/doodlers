@@ -6,7 +6,9 @@ module.exports = function(sequelize, DataTypes) {
     	type :  DataTypes.INTEGER
     },
     post : {
-    	type : DataTypes.TEXT
+    	type : DataTypes.TEXT,
+        allowNull : false
+        
     },
     createdAt:{
     	type:DataTypes.DATE,
