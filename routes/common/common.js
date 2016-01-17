@@ -29,17 +29,22 @@ var common = {
 				var encryptedPassword = bcrypt.hashSync(plainPassword);
 				var createOptions = {
 					account: req.body.username,
-					password: encryptedPassword
+					password: encryptedPassword,
+					first_name : req.body.firstname,
+					last_name : req.body.lastname,
+					color_profile : req.body.colorprofile
 				}
 				models.users.create(createOptions).then(function(respond) {
 					if (respond) {
 						res.json({
 							success: 1,
 							error: 0,
-							message: respond
+							data: respond,
+							message : 'User created successfully'
 						})
 					}
 				}).catch(function(error) {
+					console.log(error)
 					return next(error);
 				})
 			}

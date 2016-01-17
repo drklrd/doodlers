@@ -9,8 +9,19 @@ module.exports = function(router) {
 
 	router.get('/test/api', function(req, res, next) {
 
-		models.posts.find({ where: {user_id:5}, include: [models.userss]}).then(function(result){
-			console.log(result)
+		models.posts.findAll({ where: {user_id:5}, 
+			include : [models.users],
+			limit : 10,
+			order : [['created_at','DESC']]
+			}
+			).then(function(result){
+			console.log(result);
+			res.json({
+				data : result
+			})
+		}).catch(function(error){
+			console.log(error);
+			return next(error);
 		})
 
 	})
