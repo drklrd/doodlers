@@ -95,7 +95,7 @@ a {
 
 .font-white{
 	color: #ffffff;
-	font-size: 20px;
+	/*font-size: 20px;*/
 }
 
 .underline {
@@ -107,9 +107,13 @@ a {
 }
 
 .full-post-dimension {
-	height: 200px;
+	/*height: 200px;*/
 	/*width: auto;*/
 	padding: 15px;
 	border: none;
 	overflow: auto;
+}
+
+.bold {
+	font-weight: bold;
 }

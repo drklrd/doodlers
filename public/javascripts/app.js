@@ -29,6 +29,21 @@ doodlers.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     
 });
 
+doodlers.directive('focusMe', function($timeout, $parse) {
+return {
+  link: function(scope, element, attrs) {
+    var model = $parse(attrs.focusMe);
+    scope.$watch(model, function(value) {
+      if(value === true) { 
+        $timeout(function() {
+          element[0].focus(); 
+        });
+      }
+    });
+  }
+};
+});
+
 
 doodlers.factory('authInterceptor', function($rootScope, $q, $window) {
   return {
@@ -118,7 +133,7 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 						$scope.posts = data.posts;
 						if($scope.posts.length){
 							$scope.posts.forEach(function(entry){
-								entry.fromNow = moment(entry.created_at).fromNow();
+								entry.fromNow = moment(entry.createdAt).fromNow();
 							})
 						}
 					}
@@ -160,6 +175,30 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 			})
 
 	angular.element('#write-here').focus();
+
+	$scope.deletePost = function (postID) {
+
+		$http.
+			put('/users/posts/delete',{postID:postID}).
+				success(function(data){
+					if(data.success){
+						$scope.fetchPosts();
+					}
+				})
+
+	};
+
+	$scope.updatePost = function (postID,post){
+
+		$http.
+			put('/users/posts/update',{postID:postID,post:post}).
+				success(function(data){
+					if(data.success){
+						$scope.fetchPosts();
+					}
+				})
+
+	}
 
 
 }]);

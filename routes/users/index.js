@@ -6,6 +6,12 @@ module.exports = function (router) {
 
 		router.post('/users/posts/new',users.createNewPost);
 
+		router.put('/users/posts/delete',users.deletePost);
+
+		router.put('/users/posts/update',users.updatePost);
+
 		router.get('/users/profile/fetch',users.getProfile);
+
+
 
 }

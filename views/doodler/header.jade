@@ -1,9 +1,39 @@
 #header
-	.pull-left
-		span.font-white {{loggedinuser.firstName}} {{loggedinuser.lastName}}
-	.pull-right
-		md-button.md-raised(ng-show='header.loggedIn',ng-click='logOut()')
-			span Logout
+    .row
+        .pull-left
+            .row
+                .col-xs-7
+                    span.font-white {{loggedinuser.firstName}} {{loggedinuser.lastName}}
+                .col-xs-3
+                    span(ng-if="loggedinuser && loggedinuser.firstName")
+                        .btn-group(class='dropdown', is-open='status.isopen')
+                          button.btn(type='button', data-toggle='dropdown')
+                              span.caret  
+                          ul.dropdown-menu(role='menu', aria-labelledby='single-button')
+                            li(role='menuitem')
+                              a.pointer()
+                                span Manage Profile Setings
+                                         
+                            li(role='menuitem')
+                              a.pointer()
+                                span Account Settings
+                .col-xs-2
+                    span.font-white Notifications
+                            
+
+    .row
+        .col-xs-5
+        .col-xs-5
+            span.font-white.font-20(ng-show="header.loggedIn")
+                span expressions 
+                span . 
+                span  thoughts 
+                span . 
+                span   mood
+    .pull-right
+
+        md-button(ng-show='header.loggedIn',ng-click='logOut()')
+            span.font-white Logout
 
 
-	
+    

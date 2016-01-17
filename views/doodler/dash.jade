@@ -1,16 +1,29 @@
 br
 .row
     .col-xs-2
-        span Hello
+        .row
+            .col-xs-12
+                md-input-container(md-no-float)
+                    label
+                        span Search 
+                    input(type='text')
+        .row
+            .col-xs-6
+            .col-xs-6.pull-right
+                md-button.md-raised
+                    span Search 
+        
     .col-xs-8
         section.md-whiteframe-z3
-            .row
-                .col-xs-12.padding-normal
-                    md-input-container(md-no-float)
-                        textarea#write-here(placeholder="Write here... express your thoughts.... write as if you were waiting this moment....",ng-model="newpost.post")
+            form(name='newPost',novalidate)
+                .row
+                    .col-xs-12.padding-normal
+                        md-input-container(md-no-float)
+                            textarea#write-here.font-20(placeholder="Write here... express your thoughts.... write as if you were waiting this moment....",ng-model="newpost.post",required)
+                        span.pull-right.bold(ng-show="newpost.post") {{newpost.post.length}} character(s)
             .row
                 .col-xs-12
-                    md-button.md-raised.pull-right(ng-click='newPost()')
+                    md-button.md-raised.pull-right(ng-disabled="newPost.$invalid",ng-click='newPost()')
                         span Express
             br
 
@@ -29,7 +42,7 @@ br
                         .col-xs-6
                             .row
                                 .col-xs-3
-                                    span.badge.font-20.pointer(style="background-color:{{post.color_profile}}") {{post.first_name[0]}} {{post.last_name[0]}}
+                                    span.badge.font-20.pointer(style="background-color:{{post.user.color_profile}}") {{post.user.first_name[0]}} {{post.user.last_name[0]}}
                             .row
                                 .col-xs-6.pull-left
                                     span.font-14.fromNow {{post.fromNow}}
@@ -46,21 +59,35 @@ br
                                               span(ng-if="!post.viewWhole") View Whole
                                               span(ng-if="post.viewWhole") View Less
                                 li(role='menuitem')
-                                  a.pointer
+                                  a.pointer(ng-click="editPostFlag=true;tempPost=post.post")
                                     span Edit
                                 li(role='menuitem')
-                                  a.pointer
-                                    span 
+                                  a.pointer(ng-click='deletePost(post.id)')
+                                    span Delete
                     .row
                         .col-xs-1
                         .col-xs-11
-                            .font-20.padding-normal#text-overflow(ng-show="!post.viewWhole") {{post.post}}
-                            .font-20.padding-normal(ng-show="post.viewWhole") 
+                            .font-20.padding-normal#text-overflow(ng-show="!post.viewWhole && !editPostFlag") {{post.post}}
+                            .font-20.padding-normal(ng-show="post.viewWhole && !editPostFlag") 
                                 //- span {{post.post}} 
                                 //- md-input-container(md-no-float)
                                 .col-xs-12
                                     .full-post-dimension
                                         span {{post.post}}
+                            .font-20.padding-normal(ng-show="editPostFlag") 
+                                //- span {{post.post}} 
+                                //- md-input-container(md-no-float)
+                                .col-xs-12
+                                    md-input-container(md-no-float)
+                                        textarea(placeholder="Write here... express your thoughts.... write as if you were waiting this moment....",ng-model="post.post",focus-me="editPostFlag")
+                                    span.pull-right(ng-show="post.post") {{post.post.length}} character(s)
+
+                                    md-button.md-raised(ng-disabled="!post.post.length",ng-click="updatePost(post.id,post.post);editPostFlag=false;")
+                                        span Update
+                                    md-button.md-raised(ng-click="editPostFlag=false;post.post=tempPost")
+                                        span Cancel
+
+
                     hr
                             
     .col-xs-2
