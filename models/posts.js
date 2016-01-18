@@ -25,6 +25,12 @@ module.exports = function(sequelize, DataTypes) {
     } 
 
   
+  },{
+
+    associate : function () {
+        posts.belongsTo(users,{foreignKey:'user_id'});
+    }
+
   });
 
   return Posts;

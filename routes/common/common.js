@@ -6,14 +6,13 @@ var pool = mysql.createPool(dbConfig);
 var jwt = require("jsonwebtoken");
 var jwtSecret = config.jwtSecret;
 var bcrypt = require('bcryptjs');
-var models = require('../../models');
 
 var common = {
 
 	createNewUser: function(req, res, next) {
 
 
-		models.users.findOne({
+		users.findOne({
 			where: {
 				account: req.body.username
 			}
@@ -34,7 +33,7 @@ var common = {
 					last_name : req.body.lastname,
 					color_profile : req.body.colorprofile
 				}
-				models.users.create(createOptions).then(function(respond) {
+				users.create(createOptions).then(function(respond) {
 					if (respond) {
 						res.json({
 							success: 1,

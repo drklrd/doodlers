@@ -1,16 +1,16 @@
-var users = require('./users');
+var usersModule = require('./users');
 
 module.exports = function (router) {
 
-		router.get('/users/posts/fetch',users.getPosts);
+		router.get('/users/posts/fetch',usersModule.getPosts);
 
-		router.post('/users/posts/new',users.createNewPost);
+		router.post('/users/posts/new',usersModule.createNewPost);
 
-		router.put('/users/posts/delete',users.deletePost);
+		router.put('/users/posts/delete',usersModule.deletePost);
 
-		router.put('/users/posts/update',users.updatePost);
+		router.put('/users/posts/update',usersModule.updatePost);
 
-		router.get('/users/profile/fetch',users.getProfile);
+		router.get('/users/profile/fetch',usersModule.getProfile);
 
 
 

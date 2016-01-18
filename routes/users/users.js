@@ -5,14 +5,12 @@ var dbConfig=config.mysql;
 var pool=mysql.createPool(dbConfig);
 var jwt = require("jsonwebtoken");
 var jwtSecret = config.jwtSecret;
-var models = require('../../models');
 
-
-var users = {
+var usersMethods = {
 
 	getProfile : function(req,res,next){
 
-		models.users.findOne({
+		users.findOne({
 		  where: {id: req.user.id}
 		}).then(function(userResult){
 			if(userResult){
@@ -27,6 +25,7 @@ var users = {
 				})
 			}
 		}).catch(function(error){
+			console.log(error)
 			return next(error);
 		});
 		
@@ -35,8 +34,8 @@ var users = {
 
 	getPosts : function(req,res,next) {
 
-		models.posts.findAll({ where: {user_id:req.user.id,is_deleted:0}, 
-			include : [models.users],
+		posts.findAll({ where: {user_id:req.user.id,is_deleted:0}, 
+			include : [users],
 			limit : 10,
 			order : [['created_at','DESC']]
 			}
@@ -70,7 +69,7 @@ var users = {
 			user_id: req.user.id,
 			post: req.body.post
 		}
-		models.posts.create(createOptions).
+		posts.create(createOptions).
 		then(function(postResult) {
 			if (postResult) {
 				res.json({
@@ -92,11 +91,11 @@ var users = {
 			user_id : req.user.id
 		};
 
-		models.posts.findOne({
+		posts.findOne({
 		  where: {id: deleteOptions.id,user_id:deleteOptions.user_id}
 		}).then(function(post){
 			if(post){
-				models.posts.update({
+				posts.update({
 					is_deleted:1
 				},{
 					where:{
@@ -137,11 +136,11 @@ var users = {
 			post : req.body.post
 		};
 
-		models.posts.findOne({
+		posts.findOne({
 		  where: {id: updateOptions.id,user_id:updateOptions.user_id}
 		}).then(function(post){
 			if(post){
-				models.posts.update({
+				posts.update({
 					post:updateOptions.post
 				},{
 					where:{
@@ -179,4 +178,4 @@ var users = {
 };
 
 
-module.exports = users;
+module.exports = usersMethods;

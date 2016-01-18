@@ -43,6 +43,14 @@ module.exports = function(sequelize, DataTypes) {
     } 
 
   
+  },{
+
+    associate : function () {
+
+        users.hasMany(posts,{foreignKey:'user_id'});
+
+    }
+
   });
 
   return Users;

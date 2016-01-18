@@ -7,7 +7,6 @@ var pool = mysql.createPool(dbConfig);
 var jwt = require("jsonwebtoken");
 var jwtSecret = config.jwtSecret;
 var bcrypt = require('bcryptjs');
-var models = require('../../models');
 
 var login = {
 
@@ -19,7 +18,7 @@ var login = {
 		};
 
 
-		models.users.findOne({
+		users.findOne({
 			where: {
 				account: user.username
 			}

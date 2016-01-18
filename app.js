@@ -12,9 +12,6 @@ var jwtSecret = config.jwtSecret;
 var app = express();
 var models = require("./models");
 
-models.users.hasMany(models.posts,{foreignKey:'user_id'});
-models.posts.belongsTo(models.users,{foreignKey:'user_id'});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
