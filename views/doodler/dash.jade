@@ -15,7 +15,7 @@ br
         
     .col-xs-8
         section.md-whiteframe-z3
-            form(name='newPost',novalidate)
+            form(name='newPostForm',novalidate)
                 .row
                     .col-xs-12.padding-normal
                         md-input-container(md-no-float)
@@ -23,21 +23,23 @@ br
                         span.pull-right.bold(ng-show="newpost.post") {{newpost.post.length}} character(s)
             .row
                 .col-xs-12
-                    md-button.md-raised.pull-right(ng-disabled="newPost.$invalid",ng-click='newPost()')
+                    md-button.md-raised.pull-right(ng-disabled="newPostForm.$invalid",ng-click='newPost()')
                         span Express
             br
 
         br
-        section.md-whiteframe-z3
+        //- section.md-whiteframe-z3
+        br
+        span.padding-normal(ng-show="!posts.length") 
+            span No recent post(s) to show.
             br
-            span.padding-normal(ng-show="!posts.length") 
-                span No recent post(s) to show.
-                br
-                br
-            span.padding-normal(ng-show="posts.length") Showing recent post(s) 
-                br
-                br
-                .each-post(ng-repeat="post in posts track by $index")
+            br
+        span.padding-normal(ng-show="posts.length") Showing recent post(s) 
+            br
+            br
+            .each-post(ng-repeat="post in posts track by $index")
+                section.md-whiteframe-z3
+
                     .row
                         .col-xs-6
                             .row
@@ -50,7 +52,7 @@ br
 
                             br
                         .col-xs-6
-                            .btn-group(class='dropdown', is-open='status.isopen').pull-right
+                            .btn-group(class='dropdown', is-open='status.isopen').pull-right.padding-normal
                               button.btn(type='button', data-toggle='dropdown')
                                   span.caret  
                               ul.dropdown-menu(role='menu', aria-labelledby='single-button')
@@ -89,6 +91,11 @@ br
 
 
                     hr
+            .row
+                .col-xs-6
+                .col-xs-6
+                    md-button.md-raised(ng-click='loadMore()')
+                        span Load More
                             
     .col-xs-2
         span Razing Thoughts

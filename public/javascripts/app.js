@@ -56,6 +56,7 @@ doodlers.factory('authInterceptor', function($rootScope, $q, $window) {
     },
     response: function(response) {
       if (response.status === 401) {
+      	delete $window.localStorage.doodlersToken;
         alert('Please Login');
         $window.location.replace('/#/login');
         // handle the case where the user is not authenticated
@@ -64,6 +65,7 @@ doodlers.factory('authInterceptor', function($rootScope, $q, $window) {
     },
     responseError: function(rejection) {
       if (rejection.status === 401) {
+      	delete $window.localStorage.doodlersToken;
         alert('Please Login');
         $window.location.replace('/#/login');
       }
@@ -124,9 +126,11 @@ doodlers.controller('loginController',['$state','$http','$scope','$window',funct
 
 doodlers.controller('dashController',['$state','$scope','$http',function($state,$scope,$http){
 
+	var loadPostsCounter = 2;
+
 	$scope.fetchPosts = function () {
 		$http.
-			get('/users/posts/fetch').
+			get('/users/posts/fetch',{params:{loadPostsCounter:loadPostsCounter}}).
 				success(function(data){
 					if(data.success && !data.error){
 						$scope.posts=[];
@@ -198,6 +202,11 @@ doodlers.controller('dashController',['$state','$scope','$http',function($state,
 					}
 				})
 
+	};
+
+	$scope.loadMore = function () {
+		loadPostsCounter = loadPostsCounter * loadPostsCounter;
+		$scope.fetchPosts();
 	}
 
 

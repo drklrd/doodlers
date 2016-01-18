@@ -36,7 +36,7 @@ var usersMethods = {
 
 		posts.findAll({ where: {user_id:req.user.id,is_deleted:0}, 
 			include : [users],
-			limit : 10,
+			limit : req.query.loadPostsCounter || 5,
 			order : [['created_at','DESC']]
 			}
 			).then(function(result){

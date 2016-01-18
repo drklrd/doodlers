@@ -112,6 +112,8 @@ a {
 	padding: 15px;
 	border: none;
 	overflow: auto;
+	word-wrap : break-word;
+	
 }
 
 .bold {
